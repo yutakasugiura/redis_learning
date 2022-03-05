@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use Predis\Client as RedisClient;
+use Dotenv\Dotenv as Dotenv;
 
 class RedisSessionRepository
 {
@@ -11,7 +12,7 @@ class RedisSessionRepository
     public function __construct()
     {
         // グローバルにまとめたい
-        $dotenv = \Dotenv\Dotenv::createImmutable('./');
+        $dotenv = Dotenv::createImmutable('./');
         $dotenv->load();
 
         $this->redis = new RedisClient([
@@ -24,7 +25,7 @@ class RedisSessionRepository
     public function saveSession(string $sessionId, string $userId): void
     {
         $this->redis->set($sessionId, $userId);
-        $this->redis->expire($sessionId, 3600 * 1); // 1min
+        $this->redis->expire($sessionId, $_ENV['REDIS_TTL']);
     }
 
     public function getUserIdBySession(string $sessionId): string
