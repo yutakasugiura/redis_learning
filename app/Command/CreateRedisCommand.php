@@ -10,7 +10,7 @@ use App\Service\SessionService;
  * Execute Command
  *  - php App/Command/CreateRedisCommand.php
  */
-class CreateRedisCommand
+final class CreateRedisCommand
 {
     protected SessionService $sessionService;
 
