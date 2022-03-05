@@ -2,8 +2,6 @@
 
 namespace App\Service;
 
-require("vendor/autoload.php");
-
 use App\Repository\RedisSessionRepository;
 
 class SessionService
