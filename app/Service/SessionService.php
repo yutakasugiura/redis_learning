@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Repository\RedisSessionRepository;
+use LogicException;
 
 class SessionService
 {
@@ -23,8 +24,7 @@ class SessionService
     {
         // isLoggedIn?
         if (!$loginUserId) {
-            echo 'Failed Authorization';
-            return false;
+            throw new LogicException('Failed: do not exist user_id');
         }
         // userId is binded by sessionId.
         $newSessionId = uniqid('yuses_');
@@ -34,10 +34,8 @@ class SessionService
         $userId = $this->redisSessionRepository->getUserIdBySession($newSessionId);
 
         if ($userId) {
-            echo 'Success to Authorizaiton';
             return true;
         }
-        echo 'Failed Authorization';
         return false;
     }
 }

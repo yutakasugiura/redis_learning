@@ -7,7 +7,7 @@
 - 理解したい項目は下記
   - Redis
   - Session
-  - Cookie
+  - RFC6750
   - autoload
 
 ## Redis

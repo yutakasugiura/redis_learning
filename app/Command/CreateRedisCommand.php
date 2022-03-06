@@ -5,6 +5,7 @@ namespace App\Command\CreateRedisCommand;
 require("vendor/autoload.php");
 
 use App\Service\SessionService;
+use Exception;
 
 /**
  * Execute Command
@@ -13,6 +14,8 @@ use App\Service\SessionService;
 final class CreateRedisCommand
 {
     protected SessionService $sessionService;
+    
+    private const LOGIN_USER_ID = 'yusugi_';
 
     public function __construct(SessionService $sessionService = null)
     {
@@ -21,8 +24,13 @@ final class CreateRedisCommand
 
     public function execute(): void
     {
-        $loginUserId = 'test_yusugiura';
-        $this->sessionService->execute($loginUserId);
+        $loginUserId = self::LOGIN_USER_ID;
+        try {
+            $this->sessionService->execute($loginUserId);
+            echo 'Success to Authorizaiton';
+        } catch(\Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }
 
