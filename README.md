@@ -50,6 +50,7 @@ sequenceDiagram
 
     Domain->>+Service: User having session_id.
       Note over Domain, Service: send: user_id and session_id
+    Service->>Service: Auth user_id.
     Service->>Repository: Get hashed_user_id by session_id.
     Repository->>Redis: Get hashed_user_id by Session_id.
     Redis->>Repository: return hashed_user_id.
