@@ -46,6 +46,10 @@ class RedisSessionRepository
      */
     public function getUserIdBySession(string $sessionId): string
     {
-        return $this->redis->get($sessionId);
+        try {
+            return $this->redis->get($sessionId);
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage());
+        }
     }
 }
