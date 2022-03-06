@@ -37,9 +37,9 @@ sequenceDiagram
     participant Repository
     participant Redis
     Domain->>+Service: New user don not have session_id. 
-    Service->>Service: Get user_id.
+    Service->>Service: Auth user_id.
     Service->>Service: Create session_id.
-    Service->>Service: Hash user_id.
+    Service->>Service: Hash user_id by md5.
     Service->>Repository: Save Session_id with hashed_user_id.
     Repository->>Redis: Save in Redis.
     Redis-->>Repository: result.
