@@ -19,6 +19,14 @@
   - redis-cli // redis の内部に入る
     - 127.0.0.1:6379 > //ポートの割り当てが出る
 
+```
+// env生成
+cp .example.env .env
+
+// Redisにデータを出し入れする
+php App/Domain/UnderstandRedisDomain.php
+```
+
 ## Autoload
 
 - 前提
