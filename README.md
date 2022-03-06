@@ -6,13 +6,15 @@
 - なので、原理原則を知るために、フレームワークではなくライブラリーのみを使用して挙動を理解したい
 - 理解したい項目は下記
   - Redis
-  - Session
   - RFC6750
   - autoload
+  - middleware
 
 ## Redis
 
 <img src="static/img/redis_img.png">
+
+ - Redisを使ってログインSessionを管理する簡易実装
 
 ```
 // env生成
