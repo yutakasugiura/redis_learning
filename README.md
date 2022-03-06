@@ -10,7 +10,26 @@
   - autoload
   - middleware
 
-- 簡易実装のために準備したアーキテクチャ
+## Redis
+
+<img src="static/img/redis_img.png">
+
+ - Redisを使ってログインSessionを管理する簡易実装
+
+```
+// env生成
+cp .example.env .env
+
+// Redisを起動
+redis-server
+redis-cli // 操作したい時（ポート確認）
+
+// Redisにデータを出し入れする
+php App/Domain/UnderstandRedisDomain.php
+```
+
+### SequenceDiagram with Redis
+
 ```mermaid
 sequenceDiagram
     participant Domain
@@ -32,23 +51,6 @@ sequenceDiagram
     Repository->>Service: return user_id.
     Service->>Service: try something.
     Service->>-Domain: return result.
-```
-## Redis
-
-<img src="static/img/redis_img.png">
-
- - Redisを使ってログインSessionを管理する簡易実装
-
-```
-// env生成
-cp .example.env .env
-
-// Redisを起動
-redis-server
-redis-cli // 操作したい時（ポート確認）
-
-// Redisにデータを出し入れする
-php App/Domain/UnderstandRedisDomain.php
 ```
 
 ## Autoload
