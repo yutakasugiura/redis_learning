@@ -27,9 +27,7 @@ redis-cli // 操作したい時（ポート確認）
 // Redisにデータを出し入れする
 php App/Domain/UnderstandRedisDomain.php
 ```
-
 ### SequenceDiagram with Redis
-
 ```mermaid
 sequenceDiagram
     participant Domain
@@ -52,23 +50,3 @@ sequenceDiagram
     Service->>Service: try something.
     Service->>-Domain: return result.
 ```
-
-## Autoload
-
-- 前提
-  - require を使いたくない
-- 設定
-  - composer install
-  - composer dump-autoload // create autoload.php
-
-```composer.json
-{
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    }
-}
-```
-
-## interephence
