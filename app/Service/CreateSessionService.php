@@ -34,7 +34,7 @@ class CreateSessionService
         $hasedUserId = hash('md5', $loginUserId);
 
         // userId is binded by sessionId.
-        $newSessionId = uniqid('yuses_');
+        $newSessionId = 'hpx_' . substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789"), 0, 30);
         $this->redisSessionRepository->saveSession($newSessionId, $hasedUserId);
 
         return $newSessionId;
