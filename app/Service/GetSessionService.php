@@ -18,12 +18,11 @@ class GetSessionService
     }
 
     /**
-     * Undocumented function
-     *
      * @param string $sessionId
+     * @param string $userId
      * @return string
      */
-    public function execute(string $sessionId): string
+    public function execute(string $sessionId, string $userId): string
     {
         // isLoggedIn?
         if (!$sessionId) {
@@ -31,7 +30,12 @@ class GetSessionService
         }
 
         // this session is called from user's browser.
-        $userId = $this->redisSessionRepository->getUserIdBySession($sessionId);
+        $hasedUserId = $this->redisSessionRepository->getUserIdBySession($sessionId);
+
+        // user_id is same to hashed_user_id?
+        if (md5($userId) !== $hasedUserId) {
+            throw new InvalidArgumentException('Failed: Invalid user_id');
+        }
 
         if (!$userId) {
             throw new InvalidArgumentException('Failed: do not exist user_id');

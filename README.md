@@ -27,7 +27,9 @@ redis-cli // 操作したい時（ポート確認）
 // Redisにデータを出し入れする
 php App/Domain/UnderstandRedisDomain.php
 ```
+
 ### SequenceDiagram with Redis
+
 ```mermaid
 sequenceDiagram
     participant Domain
@@ -48,7 +50,7 @@ sequenceDiagram
     Repository->>Redis: Get hashed_user_id by Session_id.
     Redis->>Repository: return hashed_user_id.
     Repository->>Service: return hashed_user_id.
-    Service->>Service: Unhash user_id.
+    Service->>Service: user_id is same to hased_user_id?
     Service->>Service: Get User Object by user_id.
     Service->>Service: try something.
     Service->>-Domain: return result.

@@ -61,8 +61,9 @@ final class UnderstandRedisDomain
      */
     private function getSession(string $sessionId): string
     {
+        $loginUserId = self::LOGIN_USER_ID;
         try {
-            $userId = $this->getSessionService->execute($sessionId);
+            $userId = $this->getSessionService->execute($sessionId, $loginUserId);
             echo 'SUCCESS! Authorization' . "\n";
             return $userId;
         } catch(\Exception $e) {
