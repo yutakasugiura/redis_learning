@@ -53,10 +53,12 @@ sequenceDiagram
     Service->>Service: Auth user_id.
     Service->>Repository: Get hashed_user_id by session_id.
     Repository->>Redis: Get hashed_user_id by Session_id.
-    Redis->>Repository: return hashed_user_id.
-    Repository->>Service: return hashed_user_id.
-    Service->>Service: user_id is same to hased_user_id?
-    Service->>Service: Get User Object by user_id.
+    alt exist session_id
+      Redis->>Repository: return hashed_user_id.
+      Repository->>Service: return hashed_user_id.
+      Service->>Service: user_id is same to hased_user_id?
+      Service->>Service: Get User Object by user_id.
+    end
     Service->>Service: try something.
     Service->>-Domain: return result.
 ```
