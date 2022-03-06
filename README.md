@@ -12,16 +12,15 @@
 
 ## Redis
 
-- 前提
-  - compoer require predis/presdis
-  - brew install redis // local に redis を install
-  - redis-server // local で redis を起動
-  - redis-cli // redis の内部に入る
-    - 127.0.0.1:6379 > //ポートの割り当てが出る
+<img src="static/img/redis_img.png">
 
 ```
 // env生成
 cp .example.env .env
+
+// Redisを起動
+redis-server
+redis-cli // 操作したい時（ポート確認）
 
 // Redisにデータを出し入れする
 php App/Domain/UnderstandRedisDomain.php
