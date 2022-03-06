@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Command\CreateRedisCommand;
+namespace App\Domain;
 
 require("vendor/autoload.php");
 
@@ -8,9 +8,9 @@ use App\Service\SessionService;
 
 /**
  * Execute Command
- *  - php App/Command/CreateRedisCommand.php
+ *  - php App/Domain/UnderstandRedisDomain.php
  */
-final class CreateRedisCommand
+final class UnderstandRedisDomain
 {
     protected SessionService $sessionService;
     
@@ -36,5 +36,5 @@ final class CreateRedisCommand
 }
 
 // Dependency Injection
-$createRedisCommand = new CreateRedisCommand();
-$createRedisCommand->execute();
+$UnderstandRedisDomain = new UnderstandRedisDomain();
+$UnderstandRedisDomain->execute();
