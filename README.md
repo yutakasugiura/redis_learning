@@ -37,8 +37,8 @@ sequenceDiagram
     participant Repository
     participant Redis
     Domain->>+Service: New user don not have session_id. 
-      Note over Domain, Service: send: user_id
-    Service->>Service: Auth user_id.
+      Note over Domain, Service: send: user_id & password
+    Service->>Service: Auth user by user_id & password.
     Service->>Service: Create session_id.
     Service->>Service: Hash user_id by md5.
     Service->>Repository: Save Session_id with hashed_user_id.
@@ -56,8 +56,7 @@ sequenceDiagram
       Redis->>Repository: return hashed_user_id.
       Repository->>Service: return hashed_user_id.
       Service->>Service: user_id is same to hased_user_id?
-      Service->>Service: Get User Object by user_id.
+      Service->>Service: try something.
     end
-    Service->>Service: try something.
     Service->>-Domain: return result.
 ```
