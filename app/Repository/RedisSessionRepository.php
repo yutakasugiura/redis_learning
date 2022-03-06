@@ -35,9 +35,8 @@ class RedisSessionRepository
             $this->redis->set($sessionId, $userId);
             $this->redis->expire($sessionId, $_ENV['REDIS_TTL']);
             return true;
-        } catch (\Exception $e) {
-            error_log($e->getMessage());
-            throw new PDOException();
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage());
         }
     }
 

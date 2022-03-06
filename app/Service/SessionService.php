@@ -3,12 +3,15 @@
 namespace App\Service;
 
 use App\Repository\RedisSessionRepository;
-use LogicException;
+use App\Exceptions\InvalidArgumentException;
 
 class SessionService
 {
     protected RedisSessionRepository $redisSessionRepository;
 
+    /**
+     * @param RedisSessionRepository|null $redisSessionRepository
+     */
     public function __construct(RedisSessionRepository $redisSessionRepository = null)
     {
         // session_save_path('./auth/session'); // 実行場所からのパス
@@ -24,7 +27,7 @@ class SessionService
     {
         // isLoggedIn?
         if (!$loginUserId) {
-            throw new LogicException('Failed: do not exist user_id');
+            throw new InvalidArgumentException('Failed: do not exist user_id');
         }
         // userId is binded by sessionId.
         $newSessionId = uniqid('yuses_');
