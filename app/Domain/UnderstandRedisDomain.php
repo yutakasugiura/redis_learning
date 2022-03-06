@@ -32,7 +32,7 @@ final class UnderstandRedisDomain
         $session = $this->createSession();
         $userId = $this->getSession($session);
 
-        echo 'SUCCESS: user_id is' . $userId;
+        echo 'SUCCESS! USER::' . $userId . "\n";;
     }
 
     /**
@@ -45,7 +45,7 @@ final class UnderstandRedisDomain
         $loginUserId = self::LOGIN_USER_ID;
         try {
             $sessionId = $this->createSessionService->execute($loginUserId);
-            echo 'Success to Authorizaiton';
+            echo 'SUCCESS! Create Session' . "\n";
             return $sessionId;
         } catch(\Exception $e) {
             echo '====[ERROR]=====';
@@ -63,7 +63,7 @@ final class UnderstandRedisDomain
     {
         try {
             $userId = $this->getSessionService->execute($sessionId);
-            echo 'Success to Authorizaiton';
+            echo 'SUCCESS! Authorization' . "\n";
             return $userId;
         } catch(\Exception $e) {
             echo '====[ERROR]=====';
