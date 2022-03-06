@@ -42,9 +42,11 @@ sequenceDiagram
     Service->>Service: Hash user_id by md5.
     Service->>Repository: Save Session_id with hashed_user_id.
     Repository->>Redis: Save in Redis.
+     Note right of Redis: key: session_id<br>value: hased_user_Id <br>type: STRING<br> ttl: 60 * 60
     Redis-->>Repository: result.
     Repository-->>Service: result.
     Service->>-Domain: return session_id.
+
     Domain->>+Service: User having session_id.
     Service->>Repository: Get hashed_user_id by session_id.
     Repository->>Redis: Get hashed_user_id by Session_id.
