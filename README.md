@@ -108,23 +108,23 @@ sequenceDiagram
   participant DB as Authorization DB
   participant Resource as Resource Server
 
-  Client ->> Auth: 認可リクエスト
-  Auth ->> Client: 認可ページ
+  Client ->>+ Auth: 認可リクエスト
+  Auth ->>- Client: 認可ページ
   Client ->> Client: user / password 入力
-  Client ->> Auth: [POST]承認
+  Client ->>+ Auth: [POST]承認
   Auth ->> DB: is correct?
   DB ->> Auth: return 200 OK
   Auth ->> Auth: 認可コード発行(-10min)
     note over Auth: ?code=Po90111akjh373raQQaa...
-  Auth ->> Client: redirect url with?code={code}
-  Client ->> Auth: [POST]token発行
+  Auth ->>- Client: redirect url with?code={code}
+  Client ->>+ Auth: [POST]token発行
   Auth ->> Auth: token発行
     note over Auth: key: token, value: id
   Auth ->> DB: token保持 (Redisなど)
-  Auth ->> Client: return token
-  Client ->> Resource: Request with Bearer {token}
+  Auth ->>- Client: return token
+  Client ->>+ Resource: Request with Bearer {token}
   Resource ->> DB: is correct token?
   DB ->> Resource: return 200 OK
   Resource ->> Resource: do something
-  Resource ->> Client: return 200 OK with secure data
+  Resource ->>- Client: return 200 OK with secure data
 ```
