@@ -121,9 +121,9 @@ sequenceDiagram
   Auth ->> Auth: token発行
     note over Auth: key: token, value: id
   Auth ->> DB: token保持 (Redisなど)
-  Auth ->> Client: return TokenObject
-  Client ->> Resource: Request with Bearer {access_token}
-  Resource ->> DB: is correct accessToken?
+  Auth ->> Client: return token
+  Client ->> Resource: Request with Bearer {token}
+  Resource ->> DB: is correct token?
   DB ->> Resource: return 200 OK
   Resource ->> Resource: do something
   Resource ->> Client: return 200 OK with secure data
