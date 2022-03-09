@@ -71,7 +71,7 @@ sequenceDiagram
        - Authorization Header: Bearer Token は1つのみ含める
        - TLSの常時使用
        - tokenのTTLは60min以内
-       - codeのTTLは10min以内
+       - authorization codeのTTLは10min以内
        - tokenをURLに含めない
  - 実装は大変なので、Authleteなどの外部APIを活用する
 
@@ -105,8 +105,8 @@ WWW-Authenticate: Bearer error="insufficient_scope"
 sequenceDiagram
   participant Client
   participant Auth as Authorization Server
+  participant DB as Authorization DB
   participant Resource as Resource Server
-  participant DB as Database
 
   Client ->> Auth: 認可リクエスト
   Auth ->> Client: 認可ページ
@@ -119,11 +119,12 @@ sequenceDiagram
   Auth ->> Client: redirect url with?code={code}
   Client ->> Auth: [POST]token発行
   Auth ->> Auth: token発行
-    note over Auth: TokenObject<br>scope: string<br>expires: date<br> token_type: Bearer<br>refresh_token: string<br>access_token: string
+    note over Auth: key: token, value: id
+  Auth ->> DB: token保持 (Redisなど)
   Auth ->> Client: return TokenObject
   Client ->> Resource: Request with Bearer {access_token}
-  Resource ->> Auth: is correct accessToken?
-  Auth ->> Resource: return 200 OK
+  Resource ->> DB: is correct accessToken?
+  DB ->> Resource: return 200 OK
   Resource ->> Resource: do something
   Resource ->> Client: return 200 OK with secure data
 ```
